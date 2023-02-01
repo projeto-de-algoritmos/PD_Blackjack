@@ -1,0 +1,53 @@
+.centraliza {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home-container {
+    width: 100%;
+    height: 100%;
+    padding: 2% 10%;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.home-header {
+    width: 100%;
+    height: 25%;
+}
+
+.header-tittle {
+    padding: 1%;
+    margin-bottom: 2%;
+    color: var(--white);
+    font-size: 2.4rem;
+}
+
+.header-button {
+    background-color: var(--color5);
+    border: 1px solid var(--white);
+    color: var(--white);
+    border-radius: 10px;
+    width: 100%;
+    height: 75px;
+    text-transform: uppercase;
+}
+
+.header-button:hover {
+    opacity: 0.5;
+    transition: 0.5s;
+}
+
+.home-main {
+    width: 100%;
+    height: 50%;
+}
+
+.home-footer {
+    width: 100%;
+    height: 20%;
+}
+
+.home-footer p {
+    font-size: 0.8rem;
+}
