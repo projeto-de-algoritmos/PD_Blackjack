@@ -1,0 +1,15 @@
+.main-container {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color4);
+}
+
+:root {
+    --color1: #427a36;
+    --color2: #326628;
+    --color3: #21531b;
+    --color4: #113f0d;
+    --color5: #002b00;
+    --black: #000;
+    --white: #fff;
+}
