@@ -1,0 +1,19 @@
+.card-container {
+    width: 200px;
+    height: 300px;
+    background-color: var(--white);
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 1%;
+}
+
+.card-header {
+    height: 10%;
+}
+
+.card-main {
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
