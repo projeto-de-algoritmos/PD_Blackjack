@@ -13,5 +13,9 @@ def Hello():
 def Init_Hand():
   return blackjack.init_hand()
 
+@app.route("/get_hint/<value>")
+def Get_hint(value):
+  return blackjack.get_hint(value)
+
 if __name__ == "__main__":
   app.run(debug=True)
