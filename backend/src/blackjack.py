@@ -4,7 +4,7 @@ n = 13
 maxn = 13
 maxp = 21
 C = 21
-solution = []
+# solution = []
 
 """
 Cards number description:
@@ -20,8 +20,12 @@ Naipes description:
   2 -> ESPADA
   3 -> OUROS
 """
-def init_knapsack():
-  v = [i for i in range(10+1)]
+def init_knapsack(weight):
+  if weight > 11:
+    v = [i for i in range(10+1)]
+  else:
+    v = [i for i in range(10+1)]
+    v[1] = 11
   for _ in range(3):
     v.append(10)
   dp = [[0 for _ in range(maxp+1)] for _ in range(maxn+1)]
@@ -50,12 +54,21 @@ def init_hand():
 
   return shuffle
 
+def get_card():
+  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+  naipes = [0, 1, 2, 3]
+  return {
+    "card": random.choice(cards),
+    "naipe": random.choice(naipes)
+  }
 
 def get_hint(value):
   value = int(value)
   global dp
   global v
-  dp, v = init_knapsack()
+  global solution
+  solution  = []
+  dp, v = init_knapsack(value)
 
   ans = 0
 

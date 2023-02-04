@@ -13,6 +13,10 @@ def Hello():
 def Init_Hand():
   return blackjack.init_hand()
 
+@app.route("/get_card")
+def Get_Card():
+  return blackjack.get_card()
+
 @app.route("/get_hint/<value>")
 def Get_hint(value):
   return blackjack.get_hint(value)
