@@ -13,9 +13,9 @@ def Hello():
 def Init_Hand():
   return blackjack.init_hand()
 
-@app.route("/get_card")
-def Get_Card():
-  return blackjack.get_card()
+@app.route("/get_card/<sum_cards>")
+def Get_Card(sum_cards):
+  return blackjack.get_card(sum_cards)
 
 @app.route("/get_hint/<value>")
 def Get_hint(value):
