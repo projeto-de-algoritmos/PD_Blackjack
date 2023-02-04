@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Alert from "react-bootstrap/Alert";
 import {
   startGame,
@@ -172,7 +172,6 @@ const HomePage = () => {
               Dica da rodada: Você precisa de cartas de valores{" "}
               {hint.toString()} para ganhar!!
             </Alert>
-            {console.log("DEALERRRR", dealer)}
           </span>
         </div>
       )}

@@ -31,7 +31,7 @@ const Card = ({ numero, naipe }) => {
       {(numero == 1 || numero > 10) && (
         <>
           <div className="card-header">
-            <p>{numero === 11 ? "K" : numero === 12 ? "Q" : "J"}</p>
+            <p>{numero === 11 ? "J" : numero === 12 ? "Q" : numero === 13 ? "K" : "1"}</p>
           </div>
           <div className="card-main">
             <img
@@ -39,10 +39,10 @@ const Card = ({ numero, naipe }) => {
                 numero === 1
                   ? images.espadas
                   : numero === 11
-                  ? images.rei
+                  ? images.valete
                   : numero === 12
                   ? images.rainha
-                  : images.valete
+                  : images.rei
               }
               alt="Simbolo Black Jack"
               width={50}
