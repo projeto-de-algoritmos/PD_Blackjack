@@ -67,7 +67,6 @@ def get_card(sum):
     card_value = card
   else:
     card_value = 10
-    card = card_value
 
   return {
     "card": card,
@@ -83,7 +82,6 @@ def get_dealercard(sum):
     card_value = card
   else:
     card_value = 10
-    card = card_value
 
   return {
     "card": card,
