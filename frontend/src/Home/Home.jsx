@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
-import { startGame, getCard, getHint } from "../services/blackjack.services";
+import {
+  startGame,
+  getUserCard,
+  getDealerCard,
+  getHint,
+} from "../services/blackjack.services";
 import Card from "../Card/Card";
 import images from "../utils/images";
 import "./index.css";
@@ -14,10 +19,12 @@ const HomePage = () => {
     cards: [],
     sum_dealer: 0,
   });
+  const [message, setMessasge] = useState("Inicie e Jogo!");
   const [hint, setHint] = useState([]);
+  const [result, setResult] = useState(false);
 
   const handleHit = async () => {
-    const res_hit = (await getCard(user.sum_player)).data;
+    const res_hit = (await getUserCard(user.sum_player)).data;
     const temp = user.cards;
     const aux_card = {
       numero: res_hit.card,
@@ -28,21 +35,49 @@ const HomePage = () => {
       cards: temp,
       sum_player: res_hit.sum_player,
     });
+    if (res_hit.sum_player > 21) setMessasge("Você perdeu!!");
+    else setMessasge(`Você possui ${res_hit.sum_player} pontos!`);
     const res_hint = (await getHint(user.sum_player)).data;
-    setHint(res_hint);
+    setHint(res_hint.hint);
+    await handleDealerCard();
+  };
+
+  const handleDealerCard = async () => {
+    const res_dealer = (await getDealerCard(dealer.sum_dealer)).data;
+    console.log("res realer", res_dealer);
+    const temp = dealer.cards;
+    const aux_card = {
+      numero: res_dealer.card,
+      naipe: res_dealer.naipe,
+    };
+    temp.push(aux_card);
+    setDealer({
+      cards: temp,
+      sum_dealer: res_dealer.sum_dealer,
+    });
   };
 
   const handleStand = () => {
-    console.log("STAND BUTTON");
+    setResult(true);
+    if (user.sum_player <= 21 && dealer.sum_dealer <= 21) {
+      if (user.sum_player > dealer.sum_dealer) setMessasge("Você ganhou!!");
+      else if (user.sum_player === dealer.sum_dealer)
+        setMessasge("Partida empatada!!");
+      else setMessasge("Você perdeu!!");
+    } else {
+      if (user.sum_player <= 21) setMessasge("Você ganhou!!");
+      if (dealer.sum_dealer <= 21) setMessasge("Você perdeu!!");
+    }
   };
 
   const handleStart = async () => {
     const start_res = (await startGame()).data;
-    console.log("start_res", start_res)
     const [userCardsTemp, dealerCardsTemp] = handleInitialData(start_res);
     setUser({ cards: userCardsTemp, sum_player: start_res.sum_player });
-    setDealer({ cards: dealerCardsTemp, sum_player: start_res.sum_player });
-
+    setDealer({ cards: dealerCardsTemp, sum_dealer: start_res.sum_dealer });
+    if (start_res.sum_player > 21) setMessasge("Você perdeu!!");
+    else setMessasge(`Você possui ${start_res.sum_player} pontos!`);
+    setHint(start_res.hint.hint);
   };
 
   const handleInitialData = (data) => {
@@ -66,6 +101,11 @@ const HomePage = () => {
       cards: [],
       sum_player: 0,
     });
+    setDealer({
+      cards: [],
+      sum_dealer: 0,
+    });
+    setResult(false);
   };
 
   return (
@@ -82,58 +122,60 @@ const HomePage = () => {
           </div>
           <div className="col-3">
             <button className="header-button" onClick={(e) => handleHit(e)}>
-              Hit
+              Pegar carta
             </button>
           </div>
           <div className="col-3">
             <button className="header-button" onClick={(e) => handleStand(e)}>
-              Stand
+              Parar
             </button>
           </div>
           <div className="col-3">
             <button className="header-button" onClick={(e) => handleStart(e)}>
-              Start
+              Iniciar
             </button>
           </div>
           <div className="col-3">
             <button className="header-button" onClick={(e) => handleReset(e)}>
-              Reset
+              Resetar
             </button>
           </div>
         </div>
       </div>
       <div className="home-main">
-        <div className="message-container centraliza">
-          {user &&
-            user.cards.length > 0 &&
-            user.sum_player <= 21 &&
-            `Você está com ${user.sum_player} pontos!`}
-          {user &&
-            user.cards.length > 0 &&
-            user.sum_player > 21 &&
-            `Você perdeu!!`}
-          {user && user.cards.length === 0 && "Inicie o jogo!"}
-        </div>
+        <div className="message-container centraliza">{message}</div>
         <div className="centraliza">
           {user &&
             user.cards.map((card, index) => (
               <Card key={index} numero={card.numero} naipe={card.naipe} />
             ))}
         </div>
+        {result && (
+          <div className=" mt-2">
+            <div className="message-container text-center">
+              Dealer possui {dealer.sum_dealer} pontos!
+            </div>
+            <div className="centraliza">
+              {dealer &&
+                dealer.cards.map((card, index) => (
+                  <Card key={index} numero={card.numero} naipe={card.naipe} />
+                ))}
+            </div>
+          </div>
+        )}
       </div>
       {user && user.cards.length > 0 && (
         <div className="home-footer centraliza">
           <img src={images.dica} alt="Dica da rodada" width={100} />
-          <p>
+          <span>
             <Alert variant={"primary"}>
-              Dica da rodada dessas cartas para ganhar:
+              Dica da rodada: Você precisa de cartas de valores{" "}
+              {hint.toString()} para ganhar!!
             </Alert>
-          </p>
+            {console.log("DEALERRRR", dealer)}
+          </span>
         </div>
       )}
-      {console.log("DEALER", dealer)}
-      {console.log("USER", user)}
-
     </div>
   );
 };
