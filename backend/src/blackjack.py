@@ -39,6 +39,7 @@ def init_hand():
   shuffle = {
       "dealer": [],
       "dealer_naipes": [],
+      "sum_dealer": [],
       "player": [],
       "player_naipes": [],
       "sum_player": [],
@@ -53,6 +54,8 @@ def init_hand():
 
   shuffle['hint'] = get_hint(sum(shuffle["player"]))
   shuffle['sum_player'] = sum(shuffle['player'])
+  shuffle['sum_dealer'] = sum(shuffle['dealer'])
+
 
   return shuffle
 
@@ -60,11 +63,30 @@ def get_card(sum):
   cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
   naipes = [0, 1, 2, 3]
   card = random.choice(cards)
+  if card <= 10:
+    card_value = card
+  else:
+    card_value = 10
 
   return {
     "card": card,
     "naipe": random.choice(naipes),
-    "sum_player": int(sum) + card
+    "sum_player": int(sum) + card_value
+  }
+
+def get_dealercard(sum):
+  cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+  naipes = [0, 1, 2, 3]
+  card = random.choice(cards)
+  if card <= 10:
+    card_value = card
+  else:
+    card_value = 10
+
+  return {
+    "card": card,
+    "naipe": random.choice(naipes),
+    "sum_dealer": int(sum) + card_value
   }
 
 def get_hint(value):
