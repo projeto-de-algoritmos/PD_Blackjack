@@ -21,13 +21,13 @@ Naipes description:
   3 -> OUROS
 """
 def init_knapsack(weight):
-  if weight > 11:
-    v = [i for i in range(10+1)]
-  else:
-    v = [i for i in range(10+1)]
-    v[1] = 11
-  for _ in range(3):
-    v.append(10)
+  # if weight > 11:
+  v = [i for i in range(13+1)]
+  # else:
+    # v = [i for i in range(10+1)]
+    # v[1] = 11
+  # for _ in range(3):
+    # v.append(10)
   dp = [[0 for _ in range(maxp+1)] for _ in range(maxn+1)]
 
   return dp, v
@@ -63,30 +63,30 @@ def get_card(sum):
   cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
   naipes = [0, 1, 2, 3]
   card = random.choice(cards)
-  if card <= 10:
-    card_value = card
-  else:
-    card_value = 10
+  # if card <= 10:
+  #   card_value = card
+  # else:
+  #   card_value = 10
 
   return {
     "card": card,
     "naipe": random.choice(naipes),
-    "sum_player": int(sum) + card_value
+    "sum_player": int(sum) + card
   }
 
 def get_dealercard(sum):
   cards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
   naipes = [0, 1, 2, 3]
   card = random.choice(cards)
-  if card <= 10:
-    card_value = card
-  else:
-    card_value = 10
+  # if card <= 10:
+  #   card_value = card
+  # else:
+  #   card_value = 10
 
   return {
     "card": card,
     "naipe": random.choice(naipes),
-    "sum_dealer": int(sum) + card_value
+    "sum_dealer": int(sum) + card
   }
 
 def get_hint(value):
