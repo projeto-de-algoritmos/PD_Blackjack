@@ -37,7 +37,7 @@ const HomePage = () => {
     });
     if (res_hit.sum_player > 21) setMessasge("Você perdeu!!");
     else setMessasge(`Você possui ${res_hit.sum_player} pontos!`);
-    const res_hint = (await getHint(user.sum_player)).data;
+    const res_hint = (await getHint(res_hit.sum_player)).data;
     setHint(res_hint.hint);
     await handleDealerCard();
   };
