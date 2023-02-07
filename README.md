@@ -1,5 +1,5 @@
 **PD_BlackJack** 
-# MinimumChange
+#  Black Jack
 
 **Número da Lista**: Dupla 4<br>
 **Conteúdo da Disciplina**: Programação Dinâmica (Dynamic programming- PD)<br>
