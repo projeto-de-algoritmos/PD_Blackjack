@@ -99,6 +99,8 @@ Caso não abra automáticamente, para acessar a aplicação abra seu navegador n
 - O backend e frontend fazem uso respectivamente das portas:  http://localhost:5000 e http://localhost:3000, dessa forma certifique-se de que estejam livres para rodar a aplicação.
 
 
-
+## Vídeo de Apresentação
+- O vídeo está disponível no youtube no seguinte link: https://youtu.be/DRpIPyB1Jus
+- O vídeo está disponível no sharepoint no seguinte link: https://unbbr.sharepoint.com/sites/PA-Gravaes/_layouts/15/stream.aspx?id=%2Fsites%2FPA%2DGravaes%2FDocumentos%20Compartilhados%2FGeneral%2FRecordings%2FReuni%C3%A3o%20em%20%5FGeral%5F%2D20230206%5F212345%2DGrava%C3%A7%C3%A3o%20de%20Reuni%C3%A3o%2Emp4
 
 
